@@ -1,0 +1,25 @@
+fullnameOverride: "cluster-autoscaler"
+cloudProvider: "hetzner"
+autoDiscovery:
+  clusterName: my-cluster
+autoscalingGroups:
+  - name: "node-pool-1"
+    region: "fsn1"
+    instanceType: "cpx31"
+    maxSize: 5
+    minSize: 1
+extraEnv:
+  HCLOUD_TOKEN: [token]
+  HCLOUD_CLOUD_INIT: cnVuY21kOiBbXQo=
+
+  #HCLOUD_CLUSTER_CONFIG: "base64encoded-cluster-config"
+  #HCLOUD_FIREWALL: "default-firewall"
+  #HCLOUD_NETWORK: "default-network"
+  #HCLOUD_SSH_KEY: "default-ssh-key"
+
+#export SSH_KEY_NAME="jon@doOS"
+#export HCLOUD_REGION="fsn1"
+#export HCLOUD_CONTROL_PLANE_MACHINE_TYPE=cpx31
+#export HCLOUD_WORKER_MACHINE_TYPE=cpx31
+#export HCLOUD_TOKEN=
+

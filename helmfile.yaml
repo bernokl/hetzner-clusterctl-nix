@@ -1,0 +1,43 @@
+repositories:
+  - name: cilium
+    url: https://helm.cilium.io/
+  - name: hcloud
+    url: https://charts.hetzner.cloud
+  - name: syself
+    url: https://charts.syself.com
+  - name: autoscaler
+    url: https://kubernetes.github.io/autoscaler
+
+releases:
+  - name: cilium
+    namespace: kube-system
+    chart: cilium/cilium
+    version: 1.14.4
+    #values:
+    #  - templates/cilium/cilium.yaml
+
+  - name: hccm
+    namespace: kube-system
+    chart: hcloud/hcloud-cloud-controller-manager
+    set:
+      - name: env.HCLOUD_TOKEN.valueFrom.secretKeyRef.name
+        value: hetzner
+      - name: env.HCLOUD_TOKEN.valueFrom.secretKeyRef.key
+        value: hcloud
+      - name: privateNetwork.enabled
+        value: false
+
+
+  - name: csi
+    chart: syself/csi-hcloud
+    version: "0.2.0"
+    namespace: kube-system
+    values:
+      - ./csi.values.yaml
+
+  - name: autoscaler
+    chart: autoscaler/cluster-autoscaler
+    version: "9.46.0"
+    namespace: kube-system
+    values:
+      - ./autoscaler.values.yaml

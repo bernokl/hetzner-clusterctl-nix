@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dummy-deployment
+spec:
+  replicas: 20
+  selector:
+    matchLabels:
+      app: dummy
+  template:
+    metadata:
+      labels:
+        app: dummy
+    spec:
+      containers:
+        - name: dummy-container
+          image: busybox
+          command: ["sh", "-c", "sleep 600"]  # Sleep for 10 minutes (600 seconds)
+          resources:
+            requests:
+              cpu: "250m"  # 250 millicores
+            limits:
+              cpu: "500m"  # 500 millicores
+
